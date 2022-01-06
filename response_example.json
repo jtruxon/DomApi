@@ -1,0 +1,11 @@
+{
+  "eventAt": "2022-01-04T18:15:00.000",
+  "storeOrders": [{
+      "orderId": 1,
+      "orderPlaced": "2022-01-04T18:00:00.000",
+      "orderReady" : "2022-01-04T18:10:00.000",
+      "orderMakeSeconds" : 600,
+      "orderType": "C"
+    }
+  ]
+}
