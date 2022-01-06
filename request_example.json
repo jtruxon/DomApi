@@ -1,8 +1,8 @@
 {
 	"eventAt": "2022-01-04T18:15:00.000",
 	"storeState": {
-		"storeId": 426,
-		"ovenTimeSeconds": 480.0
+		"storeId": 1,
+		"ovenTimeSeconds": 480
 	},
 	"storeOrders": [{
 			"orderId": 1,
