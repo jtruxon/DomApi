@@ -6,33 +6,27 @@
 	},
 	"storeOrders": [{
 			"orderId": 1,
-			"orderPlaced": "2022-01-04T18:00:00.000",
-			"orderType": "C"
+			"orderPlaced": "2022-01-04T18:00:00.000"
 		},
 		{
 			"orderId": 2,
-			"orderPlaced": "2022-01-04T18:03:26.000",
-			"orderType": "C"
+			"orderPlaced": "2022-01-04T18:03:26.000"
 		},
 		{
 			"orderId": 3,
-			"orderPlaced": "2022-01-04T18:04:14.000",
-			"orderType": "D"
+			"orderPlaced": "2022-01-04T18:04:14.000"
 		},
 		{
 			"orderId": 4,
-			"orderPlaced": "2022-01-04T18:08:44.000",
-			"orderType": "D"
+			"orderPlaced": "2022-01-04T18:08:44.000"
 		},
 		{
 			"orderId": 5,
-			"orderPlaced": "2022-01-04T18:12:06.222",
-			"orderType": "C"
+			"orderPlaced": "2022-01-04T18:12:06.222"
 		},
 		{
 			"orderId": 6,
-			"orderPlaced": "2022-01-04T18:14:56.044",
-			"orderType": "C"
+			"orderPlaced": "2022-01-04T18:14:56.044"
 		}
 	],
 	"storeEmployees": [{

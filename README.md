@@ -15,10 +15,9 @@ Design a simple API using python that evaluates all current orders (orders place
 - to keep things simple, all orders are in the queue (order placed), and none are on the makeline yet
 - the time it takes to bake an order in the oven varies by store but is constant for every order in the store. this value is part of the payload and is measured in seconds
 - the time it takes to make an order is dependent on how many orders are in front of it and how many employees are available to make an order. Each employee can make one order at a time, and it takes an employee 120 seconds to make an order
-- in this scenario, carryout and delivery orders are the same and we can ignore any events after the order is ready
 
 
 The request includes the following:
-- Order Data: Order ID, order placed timestamp, order type
+- Order Data: Order ID, order placed timestamp
 - Employee Data: Employee ID, shift start time, shift end time
 - Store data: store ID, oven time in seconds
