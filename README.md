@@ -9,11 +9,11 @@ The goal is to create an endpoint that does the following:
 	- When each order will be ready
 	- How long it took to prepare each order
 
-Please complete your work as a branch from `main`, making as many commits as you like, and submit a pull request when you are finished. 
+Please complete your work as a branch from `main`, making as many commits as you like, and submit a pull request when you are finished.
 
 ## Requirements
 
-- The API should be containerized
+- The API should be built and run in a Docker container
 - Please include instructions (an `INSTRUCTIONS.md` file is fine) for building and running the application
 - Use the provided `request_example.json` payload to test your code
 - Your output should match the format of `response_example.json` (but should contain all orders from the request)
