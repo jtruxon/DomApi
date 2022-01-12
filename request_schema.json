@@ -1,0 +1,85 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "eventAt": {
+      "type": "string",
+      "pattern": "^(\\d{4}-\\d{2}-\\d{2}T(\\d{2}:){2}\\d{2}\\.\\d{3})"
+    },
+    "storeState": {
+      "type": "object",
+      "properties": {
+        "storeId": {
+          "type": "integer"
+        },
+        "ovenTimeSeconds": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "storeId",
+        "ovenTimeSeconds"
+      ]
+    },
+    "storeOrders": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/order" },
+      "minitems":1,
+      "uniqueItems": true
+    },
+    "storeEmployees": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/employee" },
+      "minitems":1,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "eventAt",
+    "storeState",
+    "storeOrders",
+    "storeEmployees"
+  ],
+  "$defs":{
+    "order":{
+      "type": "object",
+      "properties": {
+            "orderId": {
+              "type": "integer"
+            },
+            "orderPlaced": {
+              "type": "string",
+              "pattern": "^(\\d{4}-\\d{2}-\\d{2}T(\\d{2}:){2}\\d{2}\\.\\d{3})"
+            }
+          },
+          "required": [
+            "orderId",
+            "orderPlaced"
+          ]
+      },
+    
+    "employee":{
+      "type": "object",
+      "properties": {
+        "employeeId": {
+          "type": "string",
+          "pattern": "^(\\d+)"
+        },
+        "startTime": {
+          "type": "string",
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2}T(\\d{2}:){2}\\d{2}\\.\\d{3})"
+        },
+        "endTime": {
+          "type": "string",
+          "pattern": "^(\\d{4}-\\d{2}-\\d{2}T(\\d{2}:){2}\\d{2}\\.\\d{3})"
+        }
+      },
+      "required": [
+        "employeeId",
+        "startTime",
+        "endTime"
+      ]
+    }
+
+  }
+}
