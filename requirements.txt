@@ -1,0 +1,4 @@
+werkzeug = "==0.16.1"
+flask = "<2.0"
+flask-restplus = "*"
+jsonschema = "*"
