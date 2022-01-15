@@ -18,9 +18,9 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 ### Local Execution
 1. From within a blank working directory, clone a copy of this repository
 
-.. code-block:: console
-
-	`git clone https://github.com/ohyeswedid/mlops-take-home.git . `
+	```
+    git clone https://github.com/ohyeswedid/mlops-take-home.git . 
+    ```
 
 2. Create a virtual environment within this directory, using your favorite virtual environment utility.  An example using [pipenv](https://pipenv.pypa.io/en/latest/) might look like this:
 
