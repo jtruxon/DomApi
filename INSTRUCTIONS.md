@@ -56,16 +56,27 @@ As an [OpenAPI](https://swagger.io/resources/open-api/)-compliant service, the D
 
 Alternatively, the service metadata, linked directly beneath the title on the homepage of the service UI, can be imported into the [Swagger Editor](https://editor.swagger.io/) online utility, which is capable of generating clients in over 56 languages.  The this metadata is found at [http://localhost:8080/swagger.json](http://localhost:8080/swagger.json), if the setup instructions above are followed.
 
-To learn more about this package, please refer to our [readthedocs.io](https://rancher.com/docs/rancher/v2.6/en/) site.
+
+## Configuration
+This application is designed with a number of configurable values.    Given that it's targeted towards a  Docker-based runtime environment, it is designed to consume these settings environment variables within the guest OS.  
+
+To make your custom setting visible to the application, set  an environment variable using the following scheme: `{appEnvPrefix}{VARIABLE_NAME}`.   For example, to override the `"validateOrder"` value, set an environment variable named `"DOMINOS_API_VALIDATEORDER"` (note the use of ALL UPPERCASE).
+
+for Windows, this would look like:
+
+    SET DOMINOS_API_VALIDATEORDER=FALSE
+
+, or for Linux, this would look like:
+
+    export DOMINOS_API_VALIDATEORDER='FALSE'
+
+In practice,  this is most easily implemented through use of a `".env"`  file, which is just a list of key/value pairs separated by an `"="`.  This way, environment settings can be passed in bulk to the `docker run` command by using the `--env-file` option ([reference](https://docs.docker.com/engine/reference/commandline/run/)).
 
 
-##Configuration
-  
-
-
+### Application Variables
 | Name | Type | Default Value | Description 
 |-|-|-|-|
-| appEnvPrefix | string |"DOMINOS_API_" | This prefix should be added to all environment variables intended for injection into the service.  It cannot be modified at runtime.
+| appEnvPrefix | string |"DOMINOS_API_" | This prefix should be added to all environment variables intended for injection into the service.  **It cannot be modified at runtime**.
 | apiUrlPrefix | string | "" | This variable can be used to change the root URL of the API. This is useful for situations where multiple services are being aggregated under a single hostname, such as a microservice cluster and kubernetes with a single ingress. A sample value could be: `"/domapi"`
 | apiVersion | string | "0.1.0" | Sets the version of the API that's published through the interface in through the metadata.
 | apiTitle | string |"Dominos Order API" | Sets the title of the API that's published through the interface in through the metadata.
