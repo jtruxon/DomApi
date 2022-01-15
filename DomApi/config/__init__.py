@@ -1,7 +1,11 @@
 #region "Imports"
 import os
 from distutils import util
+from pkg_resources import resource_filename
 #endregion
+
+# grab a reference to the location of our package resources folder
+resources_filepath = resource_filename(__name__, '../resources')
 
 #------------------------------------------------------    
 #region "Configuration init"
@@ -26,27 +30,29 @@ default_specs = {
     "smtpSource": "noreply@jamestruxon.com",
     "smtpRecipient": "contact@jamestruxon.com",
     "smtpLoggingEnabled": False,
-    "orderSchemaFilename":"request_schema.json",
+    "orderSchemaFilename": f"{resources_filepath}/request_schema.json",
     "orderSchema":"",
-    "defaultTimeZone": -5,
-    "logginglevel": "DEBUG"
+    # "defaultTimeZone": -5,  #assuming each orders submission operates within the same timezone.
+    "loggingLevel": "INFO"
 }
 
 #---------------------------------------
 def SyncEnvironmentConfig():
     #update default specs from environment, where supplied, using prefix defined above
 
+    # ignore these keys during ENV override.  
+    ignoreEnvOverrides = ["appEnvPrefix","orderSchemaFilename"]
+
     # step through all keys in the default specs, look for correspondingly named environment variables and typecast them
     # to match the types in the default config
     for k in default_specs.keys():
         
-        # ignore this key - I can't see a good reason to override this using an *ENV variable*.  If that changes, then
-        #    it's easy to comment this line out
-        if k=="appEnvPrefix": continue
+        if k in ignoreEnvOverrides: continue
         
         try:
             valType = type(default_specs[k])
             envValue = os.environ[f"{default_specs['appEnvPrefix']}{k.upper()}"]
+
             if valType is not bool:
                 default_specs[k] = valType(envValue)
             else:
@@ -58,4 +64,9 @@ def SyncEnvironmentConfig():
             # raise all other exceptions 
             raise
         
+#dump 
+def DumpEnvironmentConfig():
+    return "\n".join([f'{item[0]}: {item[1]}' for item in  default_specs.items()])
+    
+
 #endregion

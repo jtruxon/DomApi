@@ -12,10 +12,10 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/jtruxon/DomApi",
-    download_url="https://github.com/jtruxon/DomApi/dist/DomApi-0.0.1.tar.gz",
+    #download_url="https://github.com/jtruxon/DomApi/dist/DomApi-0.0.1.tar.gz",
     include_package_data=True,
     packages=setuptools.find_packages(),
-    classifiers=(
+    classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
@@ -23,7 +23,7 @@ setuptools.setup(
         "Operating System :: Windows",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: Python :: 3.9",
-    ),
+    ],
     keywords=[],
     test_suite='tests',
     install_requires=['werkzeug==0.16.1', 'flask==1.1.4', 'flask-restplus', 'jsonschema', 'gunicorn', 'pytest'],

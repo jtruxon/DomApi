@@ -4,7 +4,7 @@ from flask_restplus import Api, Resource, fields
 #endregion
 
 #region "Local imports"
-from DomApi.config import default_specs, SyncEnvironmentConfig
+from DomApi.config import default_specs, SyncEnvironmentConfig, DumpEnvironmentConfig
 from DomApi.monitor import logger, exceptions_monitored
 from DomApi.rest_wrapper import ns, flask_app
 #endregion
@@ -73,10 +73,16 @@ def SetOrdersWorkerFn( Orders_Endpoint_Worker_Fn ):
 #-------------------------------------------------------------
 @flask_app.before_first_request
 def SetupWorker():
-    from DomApi.api.worker import Orders_API
-    
-    SyncEnvironmentConfig()
-    SetOrdersWorkerFn(Orders_API(**default_specs).Get_Order_Processing_Times)
+    # this should be a run-once method, but gunicorn and flask's dev server run in different sequences, 
+    #  which is difficult to account for with a single piece of code, so I need to drop this in to prevent 
+    #  double-execution on the dev server
+    if not "setupComplete" in default_specs:
+        default_specs["setupComplete"]  = True
+        from DomApi.api.worker import Orders_API
+        
+        SyncEnvironmentConfig()
+        SetOrdersWorkerFn(Orders_API(**default_specs).Get_Order_Processing_Times)
+        logger.critical(f"Config:\n {DumpEnvironmentConfig()}")
 
 #-------------------------------------------------------------
 def Run():

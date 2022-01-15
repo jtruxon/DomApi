@@ -8,13 +8,14 @@ WORKDIR /home
 COPY requirements.txt ./
 COPY dist ./dist
 
-RUN pip install -q -r requirements.txt && \
-    pip install dist/DomApi-0.1.0.tar.gz && \
+RUN pip install -q -r requirements.txt --no-cache-dir && \
+    pip install dist/DomApi-0.1.0.tar.gz --no-cache-dir && \
+    rm requirements.txt && \
+    pip cache purge && \
     rm -rf dist && \
-    rm requirements.txt
+    rm -rf ~/.cache/pip
 
-COPY run.sh ./
-COPY request_schema.json ./
+COPY run*.sh ./
 
 EXPOSE 8080
 
