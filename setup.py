@@ -14,6 +14,7 @@ setuptools.setup(
     url="https://github.com/jtruxon/DomApi",
     #download_url="https://github.com/jtruxon/DomApi/dist/DomApi-0.0.1.tar.gz",
     include_package_data=True,
+    package_data={"": ["resources/*"],}, #https://setuptools.pypa.io/en/latest/userguide/datafiles.html
     packages=setuptools.find_packages(),
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
