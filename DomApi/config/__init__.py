@@ -33,7 +33,8 @@ default_specs = {
     "orderSchemaFilename": f"{resources_filepath}/request_schema.json",
     "orderSchema":"",
     # "defaultTimeZone": -5,  #assuming each orders submission operates within the same timezone.
-    "loggingLevel": "INFO"
+    "loggingLevel": "INFO",
+    "maxPostLengthBytes": 1 #* 1024**2  #maximum 10 megabytes
 }
 
 #---------------------------------------

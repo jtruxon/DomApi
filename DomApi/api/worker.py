@@ -1,8 +1,8 @@
 #region "Imports"
 # import pytest
 from flask import Flask, Blueprint, request, jsonify, make_response
-from flask_restplus import Api, Resource, fields
-from flask_restplus.apidoc import apidoc
+from flask_restx import Api, Resource, fields
+from flask_restx.apidoc import apidoc
 import traceback
 from functools import wraps
 import logging, logging.handlers

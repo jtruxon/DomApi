@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 werkzeug = "==0.16.1"
-flask = "<2.0"
-flask-restplus = "*"
+flask = "==1.1.4"
 jsonschema = "*"
 pytest = "*"
+flask-restx = "*"
 
 [dev-packages]
 

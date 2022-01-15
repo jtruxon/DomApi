@@ -1,6 +1,6 @@
 #region "Imports"
 from flask import Flask, Blueprint, request, jsonify, make_response
-from flask_restplus import Api, Resource, fields
+from flask_restx import Api, Resource, fields
 #endregion
 
 #region "Local imports"

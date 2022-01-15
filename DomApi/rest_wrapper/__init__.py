@@ -1,7 +1,7 @@
 #region "Imports"
 from flask import Flask, Blueprint
-from flask_restplus import Api
-from flask_restplus.apidoc import apidoc
+from flask_restx import Api
+from flask_restx.apidoc import apidoc
 #endregion
 
 #region "Local imports"
