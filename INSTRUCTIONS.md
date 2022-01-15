@@ -72,7 +72,11 @@ Alternatively, the service metadata, linked directly beneath the title on the ho
 ## Configuration
 This application is designed with a number of configurable values.    Given that it's targeted towards a  Docker-based runtime environment, it is designed to consume these settings environment variables within the guest OS.  
 
-To make your custom setting visible to the application, set  an environment variable using the following scheme: `{appEnvPrefix}{VARIABLE_NAME}`.   For example, to override the `"validateOrder"` value, set an environment variable named `"DOMINOS_API_VALIDATEORDER"` (note the use of **ALL UPPERCASE**).
+To make your custom setting visible to the application, set an environment variable using the following scheme: 
+    
+    {appEnvPrefix}{VARIABLE_NAME}=VALUE
+
+For example, to override the `"validateOrder"` value, set an environment variable named `"DOMINOS_API_VALIDATEORDER"` (note the use of **ALL UPPERCASE**).
 
 for Windows, this would look like:
 
