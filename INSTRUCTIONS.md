@@ -18,6 +18,8 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 ### Local Execution
 1. From within a blank working directory, clone a copy of this repository
 
+.. code-block:: console
+
 	`git clone https://github.com/ohyeswedid/mlops-take-home.git . `
 
 2. Create a virtual environment within this directory, using your favorite virtual environment utility.  An example using [pipenv](https://pipenv.pypa.io/en/latest/) might look like this:
@@ -60,7 +62,7 @@ Alternatively, the service metadata, linked directly beneath the title on the ho
 ## Configuration
 This application is designed with a number of configurable values.    Given that it's targeted towards a  Docker-based runtime environment, it is designed to consume these settings environment variables within the guest OS.  
 
-To make your custom setting visible to the application, set  an environment variable using the following scheme: `{appEnvPrefix}{VARIABLE_NAME}`.   For example, to override the `"validateOrder"` value, set an environment variable named `"DOMINOS_API_VALIDATEORDER"` (note the use of ALL UPPERCASE).
+To make your custom setting visible to the application, set  an environment variable using the following scheme: `{appEnvPrefix}{VARIABLE_NAME}`.   For example, to override the `"validateOrder"` value, set an environment variable named `"DOMINOS_API_VALIDATEORDER"` (note the use of **ALL UPPERCASE**).
 
 for Windows, this would look like:
 
@@ -77,14 +79,14 @@ In practice,  this is most easily implemented through use of a `".env"`  file, w
 | Name | Type | Default Value | Description 
 |-|-|-|-|
 | appEnvPrefix | string |"DOMINOS_API_" | This prefix should be added to all environment variables intended for injection into the service.  **It cannot be modified at runtime**.
-| apiUrlPrefix | string | "" | This variable can be used to change the root URL of the API. This is useful for situations where multiple services are being aggregated under a single hostname, such as a microservice cluster and kubernetes with a single ingress. A sample value could be: `"/domapi"`
+| apiUrlPrefix | string | "" | This variable can be used to change the root URL of the API. This is useful in situations where multiple services are being aggregated under a single hostname, such as a microservice cluster in Kubernetes with a single ingress. A sample value could be: `"/domapi"`
 | apiVersion | string | "0.1.0" | Sets the version of the API that's published through the interface in through the metadata.
 | apiTitle | string |"Dominos Order API" | Sets the title of the API that's published through the interface in through the metadata.
 | apiDescription | string | "" | Sets the description of the API that's published through the interface in through the metadata.
-| validateOrder | boolean | True | Each submission is checked for schema validation priority processing. This is critical for error management in an environment where there are a variety of consumers for the service, but in a tightly controlled environment, this makes it possible to skip the validation & gain some performance.
+| validateOrder | boolean | True | Each submission is checked for schema validation prior to processing. This is critical for error management in an environment where there are a variety of consumers for the service, but in a tightly controlled development environment, it may be possible to safely skip the validation & gain some performance.
 | orderMakeTimeSeconds | integer | 120 | The time in seconds required to assemble a single pizza.
 | allowEmployeeOverTime | boolean | False | This value used for testing, not intended for production.
-| preSortOrders | boolean | True | If orders can be guaranteed to come in pre-sorted chronologically, then a slight gain in performance may be achieved by setting this value to false, and bypassing the initial sort of submitted orders.
+| preSortOrders | boolean | True | If orders can be guaranteed to come in pre-sorted chronologically, then a slight gain in performance may be achieved by setting this value to `False`, and bypassing the initial sort of submitted orders.
 |loggingLevel| string | "INFO" | Logging level for the application, can take on one of the following values: `{NOTSET,INFO,DEBUG,WARNING,ERROR,CRITICAL}`
 | smtpLoggingEnabled | boolean | False | This application features global exception monitoring; this setting, in conjunction with the next four, enable application exceptions to the reflected back to a mailbox for simple alerting. **note**: there is no authentication specified, so any MTA specified below will need to behave as an open relay for this service.
 | smtpServer | boolean | "" | SMTP Logging: mail server hostname or IP address
