@@ -10,7 +10,7 @@ from math import ceil
 #endregion
 
 #region "Local imports"
-from monitor import logger, exceptions_monitored
+from DomApi.monitor import logger, exceptions_monitored
 #endregion
 
 
@@ -21,6 +21,8 @@ from monitor import logger, exceptions_monitored
 class Orders_API:
     #------------------------------------------------------
     def __init__(self, **kwargs):
+        
+        # create 
         self.throwErrors = True
         self.validateOrder = True
         self.orderMakeTimeSeconds = 0
@@ -105,11 +107,18 @@ class Orders_API:
         import jsonschema
         from jsonschema import validate
 
+        # load up the validation schema
         if self.orderSchema=="":
-            with open(self.orderSchemaFilename, 'r') as file:
-                self.orderSchema = json.load(file)
-
+            try:
+                with open(self.orderSchemaFilename, 'r') as file:
+                    self.orderSchema = json.load(file)
+            except FileNotFoundError as e:
+                raise
+            
+        # initialize positive validation
         result = True
+
+        # validate, and record negative result if validation errors are found        
         try:
             validate(instance=orders, schema=self.orderSchema)
         except jsonschema.exceptions.ValidationError as err:
@@ -138,13 +147,13 @@ class Orders_API:
         """
         from datetime import datetime
 
-        #TODO: log results of this Validation
+        # TODO: log results of this validation, consider returning to user if failed
 
         # confirm that the order is valid, conforming to the spec
         if not self.Validate_OrderSchema(orders):
             return False
 
-        #cycle through employees to ensure valid start/end times
+        # cycle through employees to ensure valid start/end times
         validStartEndPair = lambda employee: self.DateString_To_Epoch(employee["startTime"]) < self.DateString_To_Epoch(employee["endTime"])
         for employee in orders["storeEmployees"]:
             if not validStartEndPair(employee): return False
@@ -182,20 +191,20 @@ class Orders_API:
         except:
             return None, False, "Posted order is not valid JSON"
 
-        #validate if necessary
+        # validate if necessary
         if self.validateOrder and not self.Validate_Orders(ordersObject):
             return None, False, "Posted order does not pass schema validation"
 
-        #grab the oven time for this order, calculate the minimum cycle time for a pie
+        # grab the oven time for this order, calculate the minimum cycle time for a pie
         ovenTimeSeconds = ordersObject["storeState"]["ovenTimeSeconds"]
         minCycleTimeSeconds = ovenTimeSeconds + self.orderMakeTimeSeconds
 
-        #precompute timestamps for all orders, sort if necessary
+        # precompute timestamps for all orders, sort if necessary
         ordersList = ordersObject["storeOrders"]
         for order in ordersList: order["orderPlaced"] = self.DateString_To_Epoch(order["orderPlaced"])
         if self.preSortOrders: ordersList.sort(key=lambda i: i["orderPlaced"])
 
-        #precompute timestamps for all employees, and add to priority queue
+        # precompute timestamps for all employees, and add to priority queue
         employeesList = ordersObject["storeEmployees"]
         employeeQueue = PriorityQueue()
         employeeCount = len(employeesList)
@@ -205,55 +214,63 @@ class Orders_API:
             startTime = float(employee["startTime"])
             employeeQueue.put((startTime,idx,employee),False)
 
-        #quick lambda to ease readability - returns boolean indicating whether the given employee could complete the
+        # quick lambda to ease readability - returns boolean indicating whether the given employee could complete the
         #   given order before the end of their shift
         employeeHasTime = lambda e,p: max(e["startTime"],p["orderPlaced"]) + minCycleTimeSeconds <= e["endTime"]
 
-        #iterate through items, find an employee to make it, update records as appropriate
+        # iterate through items, find an employee to make it, update records as appropriate
         for idx,pizza in enumerate(ordersList):
             itemComplete = False
 
             while not itemComplete:
-                #sanity check that we haven't run out of staff resources
+                # sanity check that we haven't run out of staff resources
                 if not employeeQueue.qsize() > 0:
                     #quit processing and return results
                     return ordersObject, False, "Insufficient staff specified for the current order."
 
-                #pop first available employee based on earliest start time, and confirm that they have time to make the pie
+                # pop first available employee based on earliest start time, and confirm that they have time to make the pie
                 employee = employeeQueue.get()[2]
 
-                #note: at this point, all times are expressed in seconds, so we can just add values up
+                # note: at this point, all times are expressed in seconds, so we can just add values up
 
-                #check to see if this employee will be onsite long enough to make the pie
+                # check to see if this employee will be onsite long enough to make the pie
                 hasTime = employeeHasTime(employee,pizza)
                 if hasTime or self.allowEmployeeOverTime:
-                    #calculate pizza absolute completion time and time to make in seconds
+                    # calculate pizza absolute completion time and time to make in seconds
                     completionTime = max(employee["startTime"],pizza["orderPlaced"])+minCycleTimeSeconds
                     orderMakeSeconds = completionTime-pizza["orderPlaced"]
-                    #write values back to orders object
+                    
+                    # write values back to orders object
                     employee["startTime"]=completionTime
                     pizza["orderPlaced"]=self.Epoch_To_DateString(pizza["orderPlaced"])
                     pizza["orderReady"]=self.Epoch_To_DateString(completionTime)
+                    # note: had the option of using 'round' or 'ceil' here to deal with fractional seconds.
+                    #   this means that we may have an error of +- .5 seconds for every pizza made, which
+                    #   can add up over time.  using 'ceil' guarantees that the impact over time is to buffer
+                    #   employee make times vs. overconstrain them.  using 'round' would theoretically be the
+                    #   most *accurate*, assuming that the positive error would balance the negative error in
+                    #   the long term, but that's not guaranteed, so I'm choosing to guarantee a result that's
+                    #   achievable by employees (assuming they hit the published make times)
                     pizza["orderMakeSeconds"]=ceil(orderMakeSeconds)
 
-                    #requeue the employee if appropriate, with updated startTime.  if we allowed overtime, then this is their last pie,
+                    # requeue the employee if appropriate, with updated startTime.  if we allowed overtime, then this is their last pie,
                     #  and we will not be requeueing them.  this will limit the overtime for any employee to the time to complete the pizza they
                     #  started while they were still on normal time
                     if hasTime: employeeQueue.put((completionTime,idx+employeeCount,employee))
 
-                    #item is complete
+                    # item is complete
                     itemComplete=True
 
                 else:
-                    #this is a redundant line, just making it clear that if the current employee doesn't have time, it's because
+                    # this is a redundant line, just making it clear that if the current employee doesn't have time, it's because
                     #  they're leaving too soon to make another pie.  cycle to the next employee.
                     continue
 
-        #we've stepped through each order, clean up the order object and return results
+        # we've stepped through each order, clean up the orders object and return results
         del ordersObject["storeState"]
         del ordersObject["storeEmployees"]
 
-        return ordersObject, True, ""
+        return ordersObject, True, None
 
 #endregion
 

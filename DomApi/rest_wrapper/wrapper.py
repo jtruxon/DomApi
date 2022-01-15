@@ -1,16 +1,17 @@
 #region "Imports"
 from flask import Flask, Blueprint, request, jsonify, make_response
 from flask_restplus import Api, Resource, fields
-from rest_wrapper import ns, flask_app
 #endregion
 
 #region "Local imports"
-from config import default_specs
-from monitor import logger, exceptions_monitored
+from DomApi.config import default_specs, SyncEnvironmentConfig
+from DomApi.monitor import logger, exceptions_monitored
+from DomApi.rest_wrapper import ns, flask_app
 #endregion
 
 ##############################################################################################
 #region "Flask endpoint"
+
 
 #simple model to enable direct entry in the "try it now" feature of the Swagger-UI and provide some context for the data structure
 order_data = ns.model(
@@ -48,11 +49,10 @@ class Endpoint(Resource):
         """
         Flask POST endpoint to handle invocation of the Orders_API.Get_Order_Processing_Times method
         """
-        from api.worker import Orders_API
         payload=request.get_data()
         if payload:
-            api = Orders_API(**default_specs)
-            result,status,message = api.Get_Order_Processing_Times(payload)
+            workerFn = default_specs["Orders_Endpoint_Worker_Fn"]
+            result,status,message = workerFn(payload)
             if status:
                 return result,200
             else:
@@ -63,11 +63,24 @@ class Endpoint(Resource):
 #endregion
 
 ##############################################################################################
-#region "Flask run"
-def Run():   
+#region "Register & Run"
+
+#-------------------------------------------------------------
+def SetOrdersWorkerFn( Orders_Endpoint_Worker_Fn ):   
+    default_specs["Orders_Endpoint_Worker_Fn"] = Orders_Endpoint_Worker_Fn
+
+
+#-------------------------------------------------------------
+def Run():
+    from DomApi.api.worker import Orders_API
+    SyncEnvironmentConfig()
+    SetOrdersWorkerFn(Orders_API(**default_specs).Get_Order_Processing_Times)
+    
     flask_app.run(debug=False, host="0.0.0.0", port=8080)
     
+#-------------------------------------------------------------
 if __name__ == "__main__":   
     Run()
+    
 #endregion
 
