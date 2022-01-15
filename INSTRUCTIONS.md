@@ -10,7 +10,7 @@ The Domino's API provides a utility for quickly computing order completion times
 	docker run -d --restart=unless-stopped -p 8080:8080 truxonjm/domapi:latest
 Open your browser to [http://localhost:8080](http://localhost:8080/)
 
-![screen recording of DomApi SwaggerUI interface](https://i.ibb.co/4FdkXTJ/DOMAPI-Swagger-UI.gif)
+![screen recording of DomApi SwaggerUI interface](https://media4.giphy.com/media/36eozbBPPIcPPhNZJc/giphy.gif)
 
 
 ## Setup 
