@@ -82,6 +82,10 @@ def SetupWorker():
         
         SyncEnvironmentConfig()
         SetOrdersWorkerFn(Orders_API(**default_specs).Get_Order_Processing_Times)
+        
+        #set Flask maximum post payload size
+        #flask_app.config['MAX_CONTENT_LENGTH'] = default_specs["maxPostLengthBytes"]
+        
         logger.critical(f"Config:\n {DumpEnvironmentConfig()}")
 
 #-------------------------------------------------------------
