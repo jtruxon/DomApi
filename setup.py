@@ -11,7 +11,8 @@ setuptools.setup(
     description="Python tool for completion time analysis of batch pizza orders",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/ohyeswedid/mlops-take-home",
+    url="https://github.com/jtruxon/DomApi",
+    download_url="https://github.com/jtruxon/DomApi/dist/DomApi-0.0.1.tar.gz",
     packages=setuptools.find_packages(),
     classifiers=(
         "Development Status :: 2 - Pre-Alpha",
