@@ -71,11 +71,16 @@ def SetOrdersWorkerFn( Orders_Endpoint_Worker_Fn ):
 
 
 #-------------------------------------------------------------
-def Run():
+@flask_app.before_first_request
+def SetupWorker():
     from DomApi.api.worker import Orders_API
+    
     SyncEnvironmentConfig()
     SetOrdersWorkerFn(Orders_API(**default_specs).Get_Order_Processing_Times)
-    
+
+#-------------------------------------------------------------
+def Run():
+    SetupWorker()
     flask_app.run(debug=False, host="0.0.0.0", port=8080)
     
 #-------------------------------------------------------------

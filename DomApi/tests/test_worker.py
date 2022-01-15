@@ -24,5 +24,5 @@ sampleOrder = lambda orderCount, employeeCount, employeeHours=16 : {
      'storeEmployees' : employeeList(employeeCount,employeeHours)
      }
 
-with open('output.json', 'w') as f:
-    json.dump(sampleOrder(100,5), f, indent=4)
+# with open('output.json', 'w') as f:
+#     json.dump(sampleOrder(100,5), f, indent=4)

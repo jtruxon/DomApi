@@ -5,7 +5,7 @@ with open("INSTRUCTIONS.md", "r") as fh:
 
 setuptools.setup(
     name="DomApi",
-    version="0.0.1",
+    version="0.1.0",
     author="James Truxon",
     author_email="contact@jamestruxon.com",
     description="Python tool for completion time analysis of batch pizza orders",
@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/jtruxon/DomApi",
     download_url="https://github.com/jtruxon/DomApi/dist/DomApi-0.0.1.tar.gz",
+    include_package_data=True,
     packages=setuptools.find_packages(),
     classifiers=(
         "Development Status :: 2 - Pre-Alpha",
@@ -25,6 +26,6 @@ setuptools.setup(
     ),
     keywords=[],
     test_suite='tests',
-    install_requires=['werkzeug==0.16.1', 'flask==1.1.4', 'flask-restplus', 'jsonschema', 'gunicorn'],
+    install_requires=['werkzeug==0.16.1', 'flask==1.1.4', 'flask-restplus', 'jsonschema', 'gunicorn', 'pytest'],
 )
 
