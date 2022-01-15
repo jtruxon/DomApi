@@ -51,7 +51,11 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 6. Open your browser to [http://localhost:8080](http://localhost:8080/)
 
 
-### Using DomApi
+## Using DomApi
+As an [OpenAPI](https://swagger.io/resources/open-api/)-compliant service, the DomApi can be consumed easily by using open-source tools to create client applications in the language of your choice.  A simple example of this for python would be to leverage the open source [PySwagger](https://github.com/pyopenapi/pyswagger) package. 
+
+Alternatively, the service metadata, linked on the homepage of the service UI, can be imported into the [Swagger Editor](https://editor.swagger.io/) online utility, which is capable of generating clients in over 20 languages.  The this metadata is found at [http://localhost:8080/swagger.json](http://localhost:8080/swagger.json), if the setup instructions above are followed.
+
 To learn more about this package, please refer to our [readthedocs.io](https://rancher.com/docs/rancher/v2.6/en/) site.
 
 
