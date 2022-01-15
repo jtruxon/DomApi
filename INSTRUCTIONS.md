@@ -24,11 +24,15 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 
 2. Create a virtual environment within this directory, using your favorite virtual environment utility.  An example using [pipenv](https://pipenv.pypa.io/en/latest/) might look like this:
 
-    `pipenv install -r requirements.txt`
+	```
+    pipenv install -r requirements.txt
+	```
 
 3. Run the DomApi.   
 	
-    `python -m DomApi.rest_wrapper.wrapper `
+	```
+    python -m DomApi.rest_wrapper.wrapper 
+	```
 
 4. Open your browser to [http://localhost:8080](http://localhost:8080/)
 
@@ -40,15 +44,21 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 
 3. Build the package distribution
 
-	`python setup.py sdist`
+	```
+	python setup.py sdist
+	```
 
 4. Build the docker image
 
-	`docker build --rm -f "Dockerfile" -t domapi:latest . `
+	```
+	docker build --rm -f "Dockerfile" -t domapi:latest . 
+	```
 
 5. Run the resulting docker container  
 
-	`docker run -d --restart=unless-stopped -p 8080:8080 --env-file .env domapi:latest`
+	```
+	docker run -d --restart=unless-stopped -p 8080:8080 --env-file .env domapi:latest
+	```
 
 6. Open your browser to [http://localhost:8080](http://localhost:8080/)
 
@@ -66,11 +76,15 @@ To make your custom setting visible to the application, set  an environment vari
 
 for Windows, this would look like:
 
-    SET DOMINOS_API_VALIDATEORDER=FALSE
+```
+SET DOMINOS_API_VALIDATEORDER=FALSE
+```
 
 , or for Linux, this would look like:
 
-    export DOMINOS_API_VALIDATEORDER='FALSE'
+```
+export DOMINOS_API_VALIDATEORDER='FALSE'
+```
 
 In practice,  this is most easily implemented through use of a `".env"`  file, which is just a list of key/value pairs separated by an `"="`.  This way, environment settings can be passed in bulk to the `docker run` command by using the `--env-file` option ([reference](https://docs.docker.com/engine/reference/commandline/run/)).
 
