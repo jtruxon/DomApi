@@ -1,0 +1,1 @@
+docker run --rm -d -p 3000:80 -p 2525:25 rnwood/smtp4dev:v3 
