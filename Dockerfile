@@ -19,6 +19,6 @@ COPY run*.sh ./
 
 EXPOSE 8080
 
-CMD ["gunicorn", "-b 0.0.0.0:8080", "-t 600", "DomApi.rest_wrapper.wrapper:flask_app"]
+CMD ["gunicorn", "-b 0.0.0.0:8080", "-t 600", "DomApi.rest_wrapper:flask_app"]
 #CMD ["python", "-m", "DomAPI.rest_wrapper.wrapper"]
 
