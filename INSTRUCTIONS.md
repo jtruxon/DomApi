@@ -141,6 +141,26 @@ In practice,  this is most easily implemented through use of a `".env"`  file, w
 * `pipenv scan` ([reference](https://pipenv-fork.readthedocs.io/en/latest/advanced.html#detection-of-security-vulnerabilities)) of this application shows no relevant vulnerabilities associated with this code or its dependencies
 * `docker scan` ([reference](https://docs.docker.com/engine/scan/)) shows [no vulnerabilities](https://snyk.io/advisor/docker/python/3.9-alpine) (this is the primary reason for choosing `python:3.9-alpine` as the base image)
 
+
+## Algorithm
+
+**Assuming**: `P` orders, `E` employees.
+
+
+### Task assignment
+The worker class uses a [PriorityQueue](https://docs.python.org/3/library/heapq.html#priority-queue-implementation-notes) to manage order assignments.   On average, this will result in `2*P` queue/dequeue operations against a queue of size `E`.  This will result in an overall scaling complexity of `O( P log E) )` for this operation.
+
+### Sorting
+As mentioned above with the `preSortOrders` variable, the default behavior is to pre-sort orders on submission, which uses a [Timsort](https://en.wikipedia.org/wiki/Timsort#Analysis) algorithm, and adds complexity of `O( P log P )` to the process.  If the submission happens to be already sorted, then this reduces to `O( P )`.  The net result is that submitting unsorted data will cause sorting to become the performance bottleneck at scale.
+
+### Memory Usage
+The task assignment utilizes in-place updates to track assignments, so this will scale linearly with `P`, and the PriorityQueue memory usage will scale linearly with `E`, which leads to overall linear scaling vs. the input, `O( P + E )`.  
+
+The Timsort operation is documented as being `O(N)`, so that would translate to `O( P )` in our use case.
+
+Overall memory usage should scale linearly with input size.  
+
+
 ## License
 
  **DomApi** is freely distributable under the terms of the [MIT license](LICENSE).
