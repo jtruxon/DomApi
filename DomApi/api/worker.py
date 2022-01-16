@@ -1,14 +1,3 @@
-#region "Imports"
-# import pytest
-from flask import Flask, Blueprint, request, jsonify, make_response
-from flask_restx import Api, Resource, fields
-from flask_restx.apidoc import apidoc
-import traceback
-from functools import wraps
-import logging, logging.handlers
-from math import ceil
-#endregion
-
 #region "Local imports"
 from DomApi.monitor import logger, exceptions_monitored
 #endregion
@@ -22,7 +11,8 @@ class Orders_API:
     #------------------------------------------------------
     def __init__(self, **kwargs):
         
-        # create 
+        # create class vars - these would be created anyway through the kwargs entered in the constructor,
+        #   but entering them here is more expressive, and it enables code completion
         self.throwErrors = True
         self.validateOrder = True
         self.orderMakeTimeSeconds = 0
@@ -184,6 +174,7 @@ class Orders_API:
 
         from queue import PriorityQueue
         import json
+        from math import ceil
 
         # load it up. CYA with try/except
         try:
@@ -225,7 +216,7 @@ class Orders_API:
             while not itemComplete:
                 # sanity check that we haven't run out of staff resources
                 if not employeeQueue.qsize() > 0:
-                    #quit processing and return results
+                    #quit processing and return partial results
                     return ordersObject, False, "Insufficient staff specified for the current order."
 
                 # pop first available employee based on earliest start time, and confirm that they have time to make the pie
@@ -274,9 +265,3 @@ class Orders_API:
 
 #endregion
 
-##############################################################################################
-# #region "Flask run"
-# if __name__ == "__main__":
-#     from rest_wrapper.wrapper import Run
-#     Run()
-# #endregion
