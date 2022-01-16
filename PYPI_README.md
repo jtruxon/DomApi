@@ -43,12 +43,12 @@ $ export DOM_API_VALIDATEORDER='FALSE'
 | apiVersion | string | "1.0.0" | Sets the version of the API that's published through the interface in through the metadata.
 | apiTitle | string |"Dom Order API" | Sets the title of the API that's published through the interface in through the metadata.
 | apiDescription | string | "" | Sets the description of the API that's published through the interface in through the metadata.
-| validateOrder | boolean | True | Each submission is checked for schema validation prior to processing. This is critical for error management in an environment where there are a variety of consumers for the service, but in a tightly controlled development environment, it may be possible to safely skip the validation & gain some performance.
+| validateOrder | boolean | True | Each submission is checked for schema validation prior to processing. This is critical for error management in an environment where there are a variety of consumers for the service, but in a tightly controlled development environment, it may be possible to set this value to `False`, and safely skip the validation to gain some performance.
 | orderMakeTimeSeconds | integer | 120 | The time in seconds required to assemble a single pizza.
 | allowEmployeeOverTime | boolean | False | This value used for testing, not intended for production.
 | preSortOrders | boolean | True | If orders can be guaranteed to come in pre-sorted chronologically, then a slight gain in performance may be achieved by setting this value to `False`, and bypassing the initial sort of submitted orders.
 |loggingLevel| string | "WARNING" | Logging level for the application, can take on one of the following values: `{NOTSET,INFO,DEBUG,WARNING,ERROR,CRITICAL}`
-| smtpLoggingEnabled | boolean | False | This application features global exception monitoring; this setting, in conjunction with the next four, enable application exceptions to the reflected back to a mailbox for simple alerting. **note**: there is no authentication specified, so any MTA specified below will need to behave as an open relay for this service.
+| smtpLoggingEnabled | boolean | False | This application features global exception monitoring; this setting, in conjunction with the next four, enables application exceptions to the reflected back to a mailbox for simple alerting. **note**: there is no authentication specified, so any MTA specified below will need to behave as an open relay for this service.
 | smtpServer | boolean | "" | SMTP Logging: mail server hostname or IP address
 | smtpServerPort | boolean | 25 | SMTP Logging: mail server port 
 | smtpSource | string | "" | SMTP Logging: source email address
