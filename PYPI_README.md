@@ -3,7 +3,7 @@ The Dom API provides a utility for quickly computing order completion times base
 
 ## Installing
 	$ pip install domapi
-	$ python -m DomApi.rest_wrapper.wrapper 
+	$ python -m DomApi.rest_wrapper 
 
 Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
 

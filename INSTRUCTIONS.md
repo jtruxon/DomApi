@@ -34,7 +34,7 @@ Open an incognito browser** to [http://localhost:8080](http://localhost:8080/)
 3. Run the DomApi.   
 	
 	```
-    python -m DomApi.rest_wrapper.wrapper 
+    python -m DomApi.rest_wrapper 
 	```
 
 4. Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
@@ -55,7 +55,7 @@ Open an incognito browser** to [http://localhost:8080](http://localhost:8080/)
 3. Run the DomApi.   
 	
 	```
-    python -m DomApi.rest_wrapper.wrapper 
+    python -m DomApi.rest_wrapper 
 	```
 
 4. Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
