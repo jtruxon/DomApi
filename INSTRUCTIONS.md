@@ -43,7 +43,7 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
     pipenv install 
 	```
 
-2. Install the DomApi from PyPi 
+2. Install the [DomApi](https://pypi.org/project/DomApi/) from PyPi 
 
 	```
     pipenv install domapi
