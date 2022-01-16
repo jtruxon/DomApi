@@ -5,7 +5,7 @@ with open("PYPI_README.md", "r") as fh:
 
 setuptools.setup(
     name="DomApi",
-    version="1.0.0",
+    version="1.1.0",
     author="James Truxon",
     author_email="contact@jamestruxon.com",
     description="Python tool for completion time analysis of batch pizza orders",
