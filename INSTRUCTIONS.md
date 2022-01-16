@@ -121,7 +121,7 @@ In practice,  this is most easily implemented through use of a `".env"`  file, w
 |-|-|-|-|
 | appEnvPrefix | string |"DOM_API_" | This prefix should be added to all environment variables intended for injection into the service.  **It cannot be modified at runtime**.
 | apiUrlPrefix | string | "" | This variable can be used to change the root URL of the API. This is useful in situations where multiple services are being aggregated under a single hostname, such as a microservice cluster in Kubernetes with a single ingress. A sample value could be: `"/domapi"`
-| apiVersion | string | "1.1.0" | Sets the version of the API that's published through the interface in through the metadata.
+| apiVersion | string | "1.2.0" | Sets the version of the API that's published through the interface in through the metadata.
 | apiTitle | string |"Dom Order API" | Sets the title of the API that's published through the interface in through the metadata.
 | apiDescription | string | "" | Sets the description of the API that's published through the interface in through the metadata.
 | validateOrder | boolean | True | Each submission is checked for schema validation prior to processing. This is critical for error management in an environment where there are a variety of consumers for the service, but in a tightly controlled development environment, it may be possible to set this value to `False`, and safely skip the validation to gain some performance.

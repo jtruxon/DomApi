@@ -19,7 +19,7 @@ default_specs = {
     "appEnvPrefix": "DOM_API_",
     "appTitle": "Dom Order API",
     "apiUrlPrefix": "",    
-    "apiVersion": "1.1.0",
+    "apiVersion": "1.2.0",
     "apiDescription": "",
     "validateOrder": True,
     "orderMakeTimeSeconds": 120,
