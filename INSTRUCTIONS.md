@@ -12,7 +12,7 @@ Open an incognito browser** to [http://localhost:8080](http://localhost:8080/)
 
 ![screen recording of DomApi SwaggerUI interface](https://media4.giphy.com/media/36eozbBPPIcPPhNZJc/giphy.gif)
 
- ** Testing with current (as of 1/2022) versions of Edge & Chrome have demonstrated rendering issues that are alleviated by running incognito*
+ ** *Testing with current (as of 1/2022) versions of Edge & Chrome have demonstrated rendering issues that are alleviated by running incognito*
 
 
 

@@ -18,8 +18,8 @@ resources_filepath = resource_filename(__name__, './resources')
 default_specs = {
     "appEnvPrefix": "DOM_API_",
     "appTitle": "Dom Order API",
-    "apiUrlPrefix": "",    #preventing overrides on this for the moment - potential bug in flask-restx causing the swagger-ui to be unstable
-    "apiVersion": "1.0.0",
+    "apiUrlPrefix": "",    
+    "apiVersion": "1.1.0",
     "apiDescription": "",
     "validateOrder": True,
     "orderMakeTimeSeconds": 120,
@@ -43,7 +43,7 @@ def SyncEnvironmentConfig():
     #update default specs from environment, where supplied, using prefix defined above
 
     # ignore these keys during ENV override.  
-    ignoreEnvOverrides = ["appEnvPrefix","orderSchemaFilename","orderResponseSchemaFilename"] #, "apiUrlPrefix"]
+    ignoreEnvOverrides = ["appEnvPrefix","orderSchemaFilename","orderResponseSchemaFilename"] 
 
     # step through all keys in the default specs, look for correspondingly named environment variables and typecast them
     # to match the types in the default config

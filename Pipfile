@@ -8,7 +8,6 @@ werkzeug = "==0.16.1"
 flask = "==1.1.4"
 jsonschema = "*"
 pytest = "*"
-flask-restx = "*"
 twine = "*"
 flask-restplus = "*"
 

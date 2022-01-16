@@ -26,6 +26,6 @@ setuptools.setup(
     ],
     keywords=[],
     test_suite='tests',
-    install_requires=['werkzeug==0.16.1', 'flask==1.1.4', 'flask-restx', 'jsonschema', 'gunicorn', 'pytest'],
+    install_requires=['werkzeug==0.16.1', 'flask==1.1.4', 'flask-restplus', 'jsonschema', 'gunicorn', 'pytest'],
 )
 
