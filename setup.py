@@ -1,11 +1,11 @@
 import setuptools
 
-with open("INSTRUCTIONS.md", "r") as fh:
+with open("PYPI_README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="DomApi",
-    version="0.1.0",
+    version="1.0.0",
     author="James Truxon",
     author_email="contact@jamestruxon.com",
     description="Python tool for completion time analysis of batch pizza orders",
@@ -21,7 +21,6 @@ setuptools.setup(
         "Environment :: Web Environment",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: MIT License",
-        "Operating System :: Windows",
         "Operating System :: POSIX :: Linux",
         "Programming Language :: Python :: 3.9",
     ],

@@ -19,7 +19,7 @@ default_specs = {
     "appEnvPrefix": "DOMINOS_API_",
     "appTitle": "Dominos Order API",
     "apiUrlPrefix": "",
-    "apiVersion": "0.0",
+    "apiVersion": "1.0.0",
     "apiDescription": "",
     "validateOrder": True,
     "orderMakeTimeSeconds": 120,
