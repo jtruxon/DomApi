@@ -136,7 +136,11 @@ In practice,  this is most easily implemented through use of a `".env"`  file, w
 | smtpRecipient | string | "" | SMTP Logging: recipient email address
 
 
+## Security
 
-# License
+* `pipenv scan` ([reference](https://pipenv-fork.readthedocs.io/en/latest/advanced.html#detection-of-security-vulnerabilities)) of this application shows no relevant vulnerabilities associated with this code or its dependencies
+* `docker scan` ([reference](https://docs.docker.com/engine/scan/)) shows [no vulnerabilities](https://snyk.io/advisor/docker/python/3.9-alpine) (this is the primary reason for choosing `python:3.9-alpine` as the base image)
+
+## License
 
  **DomApi** is freely distributable under the terms of the [MIT license](LICENSE).
