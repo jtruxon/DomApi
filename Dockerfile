@@ -2,7 +2,6 @@
 FROM python:3.9-alpine
 
 ARG version=1.2.0
-ARG requestTimeout=600
 
 LABEL Name=domapi Version=$version
 
@@ -22,6 +21,6 @@ COPY run*.sh ./
 
 EXPOSE 8080
 
-CMD ["gunicorn", "-b 0.0.0.0:8080", "-t $requestTimeout", "DomApi.rest_wrapper:flask_app"]
+CMD ["gunicorn", "-b 0.0.0.0:8080", "-t 600", "DomApi.rest_wrapper:flask_app"]
 #CMD ["python", "-m", "DomAPI.rest_wrapper.wrapper"]
 
