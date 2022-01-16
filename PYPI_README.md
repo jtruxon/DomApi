@@ -5,7 +5,7 @@ The Dom API provides a utility for quickly computing order completion times base
 	$ pip install domapi
 	$ python -m DomApi.rest_wrapper.wrapper 
 
-Open your browser to [http://localhost:8080](http://localhost:8080/)
+Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
 
 
 ## Using DomApi
@@ -32,7 +32,7 @@ for Windows, this would look like:
 , or for Linux, this would look like:
 
 ```
-$ export DOM_API_VALIDATEORDER='FALSE'
+$ export DOM_API_VALIDATEORDER="FALSE"
 ```
 
 ### Application Variables

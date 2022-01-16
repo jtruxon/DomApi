@@ -8,9 +8,12 @@ The Dom API provides a utility for quickly computing order completion times base
 
 ## Quick Start
 	docker run -d --restart=unless-stopped -p 8080:8080 truxonjm/domapi:latest
-Open your browser to [http://localhost:8080](http://localhost:8080/)
+Open an incognito browser** to [http://localhost:8080](http://localhost:8080/) 
 
 ![screen recording of DomApi SwaggerUI interface](https://media4.giphy.com/media/36eozbBPPIcPPhNZJc/giphy.gif)
+
+ ** Testing with current (as of 1/2022) versions of Edge & Chrome have demonstrated rendering issues that are alleviated by running incognito*
+
 
 
 ## Setup 
@@ -34,7 +37,7 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
     python -m DomApi.rest_wrapper.wrapper 
 	```
 
-4. Open your browser to [http://localhost:8080](http://localhost:8080/)
+4. Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
 
 ### Local Execution from PyPi
 1. Create a virtual environment within this directory, using your favorite virtual environment utility.  An example using [pipenv](https://pipenv.pypa.io/en/latest/) might look like this:
@@ -55,7 +58,7 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
     python -m DomApi.rest_wrapper.wrapper 
 	```
 
-4. Open your browser to [http://localhost:8080](http://localhost:8080/)
+4. Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
 
 ### Docker Image Build 
 1. Clone this repository into a blank working directory, as indicated above
@@ -80,7 +83,7 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 	docker run -d --restart=unless-stopped -p 8080:8080 --env-file .env domapi:latest
 	```
 
-6. Open your browser to [http://localhost:8080](http://localhost:8080/)
+6. Open an incognito browser to [http://localhost:8080](http://localhost:8080/)
 
 
 ## Using DomApi
@@ -107,7 +110,7 @@ for Windows, this would look like:
 , or for Linux, this would look like:
 
 ```
-$ export DOM_API_VALIDATEORDER='FALSE'
+$ export DOM_API_VALIDATEORDER="FALSE"
 ```
 
 In practice,  this is most easily implemented through use of a `".env"`  file, which is just a list of key/value pairs separated by an `"="`.  This way, environment settings can be passed in bulk to the `docker run` command by using the `--env-file` option ([reference](https://docs.docker.com/engine/reference/commandline/run/)).
