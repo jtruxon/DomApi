@@ -37,10 +37,11 @@ def SetLoggingLevel_FromConfig(logger):
         "notset":logging.NOTSET,        
     }
     try:
-        logger.setLevel(levels[default_specs["LoggingLevel"].tolower()])
-    except KeyError: pass
+        logger.setLevel(levels[default_specs["loggingLevel"].lower()])
+    except KeyError: 
+        raise ValueError(f"Invalid logging level specified: {default_specs['loggingLevel']}")
     except: raise
-
+    
 # get a reference to a logger, and optionally, add an smtp handler.
 #    the parameters as-specified below are assuming an open relay that doesn't 
 #    require authentication, which is not common on the open internet. expect to set up 
