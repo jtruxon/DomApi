@@ -11,11 +11,11 @@ Open your browser to [http://localhost:8080](http://localhost:8080/)
 ## Using DomApi
 As an [OpenAPI](https://swagger.io/resources/open-api/)-compliant service, the DomApi can be consumed easily by using open-source tools to create client applications in the language of your choice.  One such tool is the open source [PySwagger](https://github.com/pyopenapi/pyswagger) package for python. 
 
-Alternatively, the service metadata, linked directly beneath the title on the homepage of the service UI, can be imported into the [Swagger Editor](https://editor.swagger.io/) online utility, which is capable of generating clients in over 50 languages.  The this metadata is found at [http://localhost:8080/swagger.json](http://localhost:8080/swagger.json), if the setup instructions above are followed.
+Alternatively, the service metadata, linked directly beneath the title on the homepage of the service UI, can be imported into the [Swagger Editor](https://editor.swagger.io/) online utility, which is capable of generating clients in over 50 languages.  This metadata is found at [http://localhost:8080/swagger.json](http://localhost:8080/swagger.json), if the setup instructions above are followed.
 
 
 ## Configuration
-This application is designed with a number of configurable values.  Given that it's targeted towards a  Docker-based runtime environment, it is designed to consume these settings environment variables within the guest OS.  
+This application is designed with a number of configurable values.  Given that it's targeted towards a  Docker-based runtime environment, it is designed to consume these settings through environment variables within the guest OS.  
 
 To make your custom setting visible to the application, set an environment variable using the following scheme: 
     
