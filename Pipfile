@@ -9,6 +9,7 @@ flask = "==1.1.4"
 jsonschema = "*"
 pytest = "*"
 flask-restx = "*"
+twine = "*"
 
 [dev-packages]
 
