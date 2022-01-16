@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+werkzeug = "==0.16.1"
+flask = "==1.1.4"
+jsonschema = "*"
+pytest = "*"
+twine = "*"
+flask-restplus = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "*"

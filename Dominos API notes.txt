@@ -1,0 +1,192 @@
+Dominos API validation
+
+
+Flask Restplus
+SwaggerUI
+self documenting
+unit tests
+docker container, size minimized
+explanation via outputNotes.md
+instructions via INSTRUCTIONS.md 
+order validation / field validation
+	- https://www.liquid-technologies.com/online-json-to-schema-converter
+	- https://www.liquid-technologies.com/online-json-schema-validator
+	- http://donofden.com/blog/2020/03/15/How-to-Validate-JSON-Schema-using-Python
+speed testing / scaling comments
+pip install manifest
+parametrized lifecycle constants
+	- validateOrder
+	- throwErrors
+	- orderMakeTime
+	- employeeOvertime
+	- preSortOrders
+
+threadsafe
+
+
+logging
+	- errors, emit to smtp?
+	- speed metrics logging
+
+code comments, docstrings, Sphinx
+mention authorization
+
+
+
+challenges:
+	employee shifts start & end
+	employee should start a pie as soon as shift starts
+	employee cannot start a pie that ends after their shift ends
+
+edge cases:
+	empty submission
+	empty order list
+	very long order list
+	zero employees, or employee shifts start a long time after orders start
+	employee shift ends before it starts
+
+
+
+approach:
+	sort orders chronologically
+	sort employees chronologically by start time
+	priority queue for employees
+	cycle through employees, distribute pie, post employee with new priority, repeat
+		on adding pie to employee, update employee 
+
+
+
+
+compute requirements:
+	N orders, M employees
+	PriorityQueue - O(log(n)) insertion/extraction
+	NlogM
+
+
+memory requirements:
+	N+M
+
+
+
+questions:
+	assume all times in GMT?
+
+
+style guide:
+	http://adv-r.had.co.nz/Style.html
+
+
+
+Get_Order_Processing_Times
+        * convert dates to timestamp objects (staff, orders)
+        * add staff to queue, key = startTime
+        * sort orders (if not disabled)
+        * while orders exist
+                - pop order, pop staff member
+                - if (startTime + order_cycle_time) > endTime, skip.  else:
+                - order_completion = max(first_availability, order time) + order_cycle_time
+                - order_duration = order_completion - order_placed
+                - staff.first_availability += order_cycle_time
+                - push staff member to queue
+        * compile output
+
+
+Goal:
+
+	worker_file.py
+
+		import myFlaskWrapper as wrapper
+
+		Class Do_Stuff:
+			pass
+
+		wrapper.RegisterPostEndPoint( '/api/orders', Do_Stuff.worker_fn  )
+		wrapper.RegisterGetEndPoint( '/api/orders', Do_Stuff.worker_fn  )
+		flask_app = wrapper.serve(port="8080")
+
+----
+
+
+	Dockerfile
+
+
+		... python, gunicorn, etc ...
+
+		RUN pip install myflask-wrapper
+
+		COPY app
+
+		CMD gunicorn run flask_app
+
+
+-----
+
+infosec:
+	- document max post size, consider checking, consider security scan of dependencies
+	- snyk security shows current base image is best option in the python:* group
+	- SSL will be handled by the K8s ingress controller
+
+-----
+
+x update to Flask_RestX??!
+
+
+find / -name re*.json
+
+-----
+
+testing:
+
+	config: 
+		- confirm import without exception
+
+		- SyncEnvironmentConfig
+			- set environment variable, confirm writeback to default specs
+			- set ignored variable, confirm failure to writeback
+
+
+		- DumpEnvironmentConfig()
+			- set default spec variable, confirm presence in output
+
+
+	monitor:
+
+		- confirm import without exception
+
+		- SetLoggingLevel_FromConfig
+			- set LoggingLevel default spec variable, confirm logger level set
+			- set invalid level, confirm ValueError
+
+		- SetupWorker
+			- execute, confirm default_specs["setupComplete"] == True
+
+
+	worker: 
+
+		- send invalid formats
+			- empty post
+			- zero employees
+			- zero orders
+			- invalid date format
+			- invalid start/end time for employee
+			- missing key, extra key
+
+		- send known input/output
+			- single order / single output
+			- insufficient employees
+			- validate schema for order output using resonse_schema.json
+			- very long order list
+			- max_content_length overflow
+
+
+SMTP Server for Testing:
+	https://mailosaur.com/blog/2021/03/setting-up-a-fake-smtp-server-for-testing/
+
+pip --no-cache-dir install domapi 
+
+import os
+
+with open('.env') as f: envs = f.readlines()
+envs = "".join(envs).split()
+for i in envs:
+	os.environ[i[0]]=i[1]

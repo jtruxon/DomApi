@@ -1,0 +1,6 @@
+werkzeug==0.16.1
+flask==1.1.4
+flask-restplus
+jsonschema
+gunicorn
+pytest
