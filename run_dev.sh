@@ -1,1 +1,1 @@
-python -m DomApi.rest_wrapper.wrapper
+python -m DomApi.rest_wrapper

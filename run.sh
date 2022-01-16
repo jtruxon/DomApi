@@ -1,1 +1,1 @@
-gunicorn -b 0.0.0.0:8080 -t 600 DomApi.rest_wrapper.wrapper:flask_app
+gunicorn -b 0.0.0.0:8080 -t 600 DomApi.rest_wrapper:flask_app
