@@ -1,11 +1,16 @@
-import setuptools
+import setuptools, os
 
 with open("PYPI_README.md", "r") as fh:
     long_description = fh.read()
 
+apiVersion = ""
+try:
+    apiVersion = os.environ["DOM_API_APIVERSION"]
+except: pass
+
 setuptools.setup(
     name="DomApi",
-    version="1.2.0",
+    version=apiVersion,
     author="James Truxon",
     author_email="contact@jamestruxon.com",
     description="Python tool for completion time analysis of batch pizza orders",

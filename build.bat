@@ -1,1 +1,1 @@
-docker build --rm -f "Dockerfile" -t domapi:latest .
+docker build --rm -f "Dockerfile"  --build-arg version=%DOM_API_APIVERSION% -t domapi:latest .

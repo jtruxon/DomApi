@@ -1,7 +1,9 @@
 # FROM python:3.9-slim-bullseye
 FROM python:3.9-alpine
 
-LABEL Name=domapi Version=1.2.0
+ARG version=1.2.0
+
+LABEL Name=domapi Version=$version
 
 WORKDIR /home
 
@@ -9,7 +11,7 @@ COPY requirements.txt ./
 COPY dist ./dist
 
 RUN pip install -q -r requirements.txt --no-cache-dir && \
-    pip install dist/DomApi-1.2.0.tar.gz --no-cache-dir && \
+    pip install dist/DomApi-$version.tar.gz --no-cache-dir && \
     rm requirements.txt && \
     pip cache purge && \
     rm -rf dist && \

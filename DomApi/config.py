@@ -19,7 +19,7 @@ default_specs = {
     "appEnvPrefix": "DOM_API_",
     "appTitle": "Dom Order API",
     "apiUrlPrefix": "",    
-    "apiVersion": "1.2.0",
+    "apiVersion": "",
     "apiDescription": "",
     "validateOrder": True,
     "orderMakeTimeSeconds": 120,
@@ -70,5 +70,4 @@ def SyncEnvironmentConfig():
 def DumpEnvironmentConfig():
     return "\n".join([f'{item[0]}: {item[1]}' for item in  default_specs.items()])
  
-
 #endregion
