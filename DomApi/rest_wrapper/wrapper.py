@@ -78,10 +78,12 @@ def SetupWorker():
     #  double-execution on the dev server
     if not "setupComplete" in default_specs:
         default_specs["setupComplete"]  = True
+        
         from DomApi.api.worker import Orders_API
+        workerFn = Orders_API(**default_specs).Get_Order_Processing_Times
         
         SyncEnvironmentConfig()
-        SetOrdersWorkerFn(Orders_API(**default_specs).Get_Order_Processing_Times)
+        SetOrdersWorkerFn(workerFn)
         
         #set Flask maximum post payload size
         #flask_app.config['MAX_CONTENT_LENGTH'] = default_specs["maxPostLengthBytes"]
@@ -91,6 +93,7 @@ def SetupWorker():
 #-------------------------------------------------------------
 def Run():
     SetupWorker()
+        
     flask_app.run(debug=False, host="0.0.0.0", port=8080)
     
 #-------------------------------------------------------------

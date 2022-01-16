@@ -12,12 +12,12 @@ resources_filepath = resource_filename(__name__, '../resources')
 
 # these values will be available to the api worker, and may be overridden by setting 
 # environment variables with the format: {appEnvPrefix}{VARIABLE NAME}, e.g. to 
-# override the smtpServerPort, call "set DOMINOS_API_SMTPSERVERPORT=[value]" in Windows, 
-# or "export DOMINOS_API_SMTPSERVERPORT=[value]" in Linux. Do not override appEnvPrefix;
+# override the smtpServerPort, call "set DOM_API_SMTPSERVERPORT=[value]" in Windows, 
+# or "export DOM_API_SMTPSERVERPORT=[value]" in Linux. Do not override appEnvPrefix;
 # this won't throw errors, but it will likely cause unpredictable value write-in behavior
 default_specs = {
-    "appEnvPrefix": "DOMINOS_API_",
-    "appTitle": "Dominos Order API",
+    "appEnvPrefix": "DOM_API_",
+    "appTitle": "Dom Order API",
     "apiUrlPrefix": "",
     "apiVersion": "1.0.0",
     "apiDescription": "",
@@ -25,15 +25,16 @@ default_specs = {
     "orderMakeTimeSeconds": 120,
     "allowEmployeeOverTime": False,
     "preSortOrders": True,
-    "smtpServer": "smtp.gmail.com",
+    "smtpServer": "",
     "smtpServerPort": 25,
-    "smtpSource": "noreply@jamestruxon.com",
-    "smtpRecipient": "contact@jamestruxon.com",
+    "smtpSource": "",
+    "smtpRecipient": "",
     "smtpLoggingEnabled": False,
     "orderSchemaFilename": f"{resources_filepath}/request_schema.json",
+    "orderResponseSchemaFilename": f"{resources_filepath}/response_schema.json",
     "orderSchema":"",
     # "defaultTimeZone": -5,  #assuming each orders submission operates within the same timezone.
-    "loggingLevel": "INFO",
+    "loggingLevel": "WARNING",
     "maxPostLengthBytes": 1 #* 1024**2  #maximum 10 megabytes
 }
 
@@ -42,7 +43,7 @@ def SyncEnvironmentConfig():
     #update default specs from environment, where supplied, using prefix defined above
 
     # ignore these keys during ENV override.  
-    ignoreEnvOverrides = ["appEnvPrefix","orderSchemaFilename"]
+    ignoreEnvOverrides = ["appEnvPrefix","orderSchemaFilename","orderResponseSchemaFilename"]
 
     # step through all keys in the default specs, look for correspondingly named environment variables and typecast them
     # to match the types in the default config
